@@ -1,0 +1,14 @@
+CREATE VIEW view_name1 AS
+SELECT * FROM frequency
+UNION
+SELECT 'q' as docid, 'washington' as term, 1 as count 
+UNION
+SELECT 'q' as docid, 'taxes' as term, 1 as count
+UNION 
+SELECT 'q' as docid, 'treasury' as term, 1 as count;
+
+SELECT TOP 1 b.docid, SUM(a.count * b.count) AS similarity
+  FROM view_name1 a, frequency b
+ WHERE a.term = b.term AND a.docid = 'q'
+ GROUP BY b.docid ORDER BY similarity DESC; 
+

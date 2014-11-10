@@ -1,0 +1,12 @@
+SELECT a.docid, b.docid, SUM(a.count * b.count)  AS similarity
+  FROM 
+(SELECT * FROM frequency
+UNION
+SELECT 'q' as docid, 'washington' as term, 1 as count 
+UNION
+SELECT 'q' as docid, 'taxes' as term, 1 as count
+UNION 
+SELECT 'q' as docid, 'treasury' as term, 1 as count)a, frequency b
+ WHERE a.term = b.term AND NOT a.docid = b.docid
+ GROUP BY a.docid; 
+

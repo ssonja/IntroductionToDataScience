@@ -1,0 +1,6 @@
+SELECT count(*) FROM (
+SELECT DISTINCT docid, (SELECT SUM(count) AS total FROM frequency a WHERE b.docid = a.docid ) AS total
+FROM frequency b
+WHERE total >=300
+);
+

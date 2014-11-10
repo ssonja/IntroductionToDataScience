@@ -1,0 +1,35 @@
+import MapReduce
+import sys
+
+"""
+Count friends given pairs friendA,FriendB as records
+"""
+
+mr = MapReduce.MapReduce()
+
+# =============================
+# Do not modify above this line
+
+must_hold_global_list = []  # list previously handled people
+map_of_people = {}
+counted_people =0
+
+def mapper(record):    
+    key = record[0]      # friendA
+    word = record[1]     # friendB
+    map_of_people[key]=1
+    mr.emit_intermediate((record[1], record[0]),1)
+    mr.emit_intermediate((record[0], record[1]),1)
+
+
+def reducer(pair, list_of_values):
+    if len(list_of_values) == 1:
+        mr.emit(pair)
+    else:
+        print "mutual: ", pair
+
+# Do not modify below this line
+# =============================
+if __name__ == '__main__':
+  inputdata = open(sys.argv[1])
+  mr.execute(inputdata, mapper, reducer)

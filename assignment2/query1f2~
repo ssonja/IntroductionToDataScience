@@ -1,0 +1,3 @@
+SELECT a.docid FROM (SELECT docid FROM frequency a WHERE term ="transactions") a,
+(SELECT docid FROM frequency a WHERE term ="world") b
+WHERE a.docid = b.docid;

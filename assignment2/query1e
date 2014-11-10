@@ -1,0 +1,2 @@
+SELECT a.docid, (SELECT SUM(count) AS total FROM frequency b WHERE a.docid = b.docid)
+FROM frequency a;

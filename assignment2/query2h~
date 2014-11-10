@@ -1,0 +1,5 @@
+SELECT a.docid as docid1, b.docid as docid2, SUM(a.count * b.count) AS similarity
+  FROM frequency a, frequency b
+ WHERE a.term = b.term
+ GROUP BY docid1, docid2;
+
